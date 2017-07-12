@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-autowire="byName">
+
+<context:component-scan base-package="com.ys.project"/>  
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<!-- initialPoolSize: 初始化时创建的连接数,应在minPoolSize与maxPoolSize之间取值.默认为3 -->
+		<property name="initialPoolSize" value="3" />
+		<!-- maxPoolSize: 连接池中保留的最大连接数据.默认为15  -->
+		<property name="maxPoolSize" value="30" />
+		<property name="minPoolSize" value="2" />
+		<!-- maxIdleTime: 最大空闲时间,超过空闲时间的连接将被丢弃.为0或负数据则永不丢弃.默认为0;   -->
+		<property name="maxIdleTime" value="60" />
+		
+			<!-- maxStatements:JDBC的标准参数,用以控制数据源内加载的PreparedStatement数据. 但由于预缓存的Statement属于单个Connection而不是整个连接池.所以设置这个参数需要考滤到多方面的因素,
+			如果maxStatements与maxStatementsPerConnection均为0,则缓存被关闭.默认为0; -->
+		
+		<property name="maxStatements" value="0" />
+		<!-- maxStatementsPerConnection: 连接池内单个连接所拥有的最大缓存被关闭.默认为0;  -->
+		<property name="maxStatementsPerConnection" value="80" />
+		<!-- acquireIncrement 当连接池中的连接用完时，C3PO一次性创建新的连接数目 -->
+		<property name="acquireIncrement" value="1" />
+	</bean> 
+
+	<!-- Transaction manager for a single JDBC DataSource -->
+ 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor"
+		lazy-init="true" />
+	<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
+		<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor" />
+	</bean>
+	<!-- SqlMap setup for iBATIS Database Layer -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:sqlmap-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="lobHandler" ref="oracleLobHandler" />
+	</bean>
+	<!-- ========================= ASPECT CONFIGURATION ======================== -->
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.chao.project.service.*Service.*(..))" advice-ref="txAdvice" />
+	</aop:config>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="create*" />
+			<tx:method name="modify*" />
+			<tx:method name="remove*" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+</beans>

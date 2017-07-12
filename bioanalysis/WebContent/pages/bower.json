@@ -1,0 +1,46 @@
+{
+  "name": "dMsgServer",
+  "version": "0.0.1",
+  "authors": [
+    "angrycans"
+  ],
+  "description": "AngularJs Bootstrap Admin DmsgServer web",
+  "keywords": [
+    "dmsg"
+  ],
+  "license": "GPL-L",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fastclick": "~1.0.6",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.4",
+    "angular-bootstrap": "~0.13.0",
+    "angular-ui-router": "~0.2.15",
+    "angular-loading-bar": "~0.7.1",
+    "angular-animate": "~1.4.0",
+    "angular-cookies": "~1.4.0",
+    "angular-resource": "~1.4.0",
+    "angular-sanitize": "~1.4.0",
+    "angular-touch": "~1.4.0",
+    "ngstorage": "~0.3.4",
+    "angular-translate": "~2.7.2",
+    "angular-translate-loader-static-files": "~2.7.2",
+    "angular-translate-storage-local": "~2.7.2",
+    "oclazyload": "~1.0.1",
+    "angular-translate-storage-cookie": "~2.7.2",
+    "angular": "~1.4.0",
+    "angular-scroll": "~0.7.1",
+    "themify-icons": "~0.1.0",
+    "ng-table": "~0.5.4",
+    "angular-breadcrumb": "~0.4.0",
+    "perfect-scrollbar": "~0.6.2"
+  }
+}

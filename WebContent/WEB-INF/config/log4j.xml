@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <appender name="ERRORLogger" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="../yunlog/ErrLog" />
+    <param name="threshold" value="error" />
+    <param name="MaxFileSize" value="100KB" />
+    <param name="MaxBackupIndex" value="100" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d [%-5p] %c %m%n" />
+    </layout>
+  </appender>
+  <appender name="AllLogger" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="../yunlog/ALLlog" />
+    <param name="threshold" value="DEBUG" />
+    <param name="MaxFileSize" value="10MB" />
+    <param name="MaxBackupIndex" value="100" />
+    <layout class="org.apache.log4j.TTCCLayout" />
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="DEBUG" />
+      <param name="LevelMax" value="ERROR" />
+    </filter>
+  </appender>
+  <appender name="SystemOutLogger" class="org.apache.log4j.ConsoleAppender">
+    <param name="threshold" value="DEBUG" />
+    <param name="target" value="System.out" />
+    <layout class="org.apache.log4j.TTCCLayout" />
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="DEBUG" />
+      <param name="LevelMax" value="ERROR" />
+    </filter>
+  </appender>
+  <root>
+    <priority value="DEBUG" />
+    <appender-ref ref="AllLogger" />
+    <appender-ref ref="SystemOutLogger" />
+  </root>
+  <logger name="body" additivity="false">
+    <level value="DEBUG" />
+    <appender-ref ref="ERRORLogger" />
+    <appender-ref ref="AllLogger" />
+  </logger>
+</log4j:configuration>
+

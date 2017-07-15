@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig 
+		PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" 
+		"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true" lazyLoadingEnabled="true"
+		useStatementNamespaces="false" statementCachingEnabled="true" classInfoCacheEnabled="true" />
+
+	<typeHandler jdbcType="BLOB" javaType="[B" callback="org.springframework.orm.ibatis.support.BlobByteArrayTypeHandler" />
+	<typeHandler jdbcType="CLOB" javaType="java.lang.String" callback="org.springframework.orm.ibatis.support.ClobStringTypeHandler" />
+
+	<sqlMap resource="com/ys/project/dao/imp/xml/User_SqlMap.xml" />
+
+</sqlMapConfig>

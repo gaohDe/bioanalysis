@@ -1,0 +1,26 @@
+[
+  {
+    "name": "admin",
+    "age":24,
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "name": "Tom",
+    "age":36,
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "name": "Vivian",
+    "age":19,
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "name": "Scarlett",
+    "age":28,
+    "password": "123456",
+    "role": "admin"
+  }
+]

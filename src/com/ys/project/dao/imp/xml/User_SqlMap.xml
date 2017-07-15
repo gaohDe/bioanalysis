@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="USER_INFO">
+
+	<typeAlias alias="userInfo" type="com.ys.project.entity.UserInfo" />
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertUserInfo" />
+		<flushOnExecute statement="updateUserInfo" />
+		<flushOnExecute statement="deleteUserInfo" />
+	</cacheModel>
+
+	<resultMap id="userInfoResultForList" class="userInfo">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="LOGIN_NAME" property="login_name" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="IS_LOCKED" property="is_locked" jdbcType="VARCHAR" />
+		<result column="USER_ROLE" property="user_role" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="userInfoResult" class="userInfo" extends="userInfoResultForList">
+	</resultMap>
+
+	<sql id="sf-userInfo">
+		<isNotEmpty prepend=" and " property="id">a.ID = #id:DECIMAL#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_name">a.USER_NAME = #user_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="login_name">a.LOGIN_NAME = #login_name:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="password">a.PASSWORD = #password:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="is_locked">a.IS_LOCKED = #is_locked:VARCHAR#</isNotEmpty>
+		<isNotEmpty prepend=" and " property="user_role">a.USER_ROLE = #user_role:VARCHAR#</isNotEmpty>
+	</sql>
+
+	<select id="selectUserInfo" resultMap="userInfoResult" parameterClass="userInfo" cacheModel="oneDayCache">
+		select * from USER_INFO a where 1 = 1
+		<include refid="sf-userInfo" />
+	</select>
+
+	<select id="selectUserInfoList" resultMap="userInfoResultForList" parameterClass="userInfo" cacheModel="oneDayCache">
+		<isNotEmpty property="row.count">
+			<![CDATA[ select * from ( ]]>
+		</isNotEmpty>
+		select * from USER_INFO a where 1 = 1
+		<include refid="sf-userInfo" />
+		<isNotEmpty prepend=" and " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+		</isNotEmpty>
+		order by ORDER_VALUE desc, ID desc
+		<isNotEmpty property="row.count">
+			<![CDATA[ ) where rownum <= #row.count# ]]>
+		</isNotEmpty>
+	</select>
+
+	<select id="selectUserInfoCount" resultClass="long" parameterClass="userInfo" cacheModel="oneDayCache">
+		select count(*) from USER_INFO a where 1 = 1
+		<include refid="sf-userInfo" />
+	</select>
+
+	<select id="selectUserInfoPaginatedList" resultMap="userInfoResult" parameterClass="userInfo" cacheModel="oneDayCache">
+		<![CDATA[ select * from ( select t_.*, rownum rn_ from ( ]]>
+		select * from USER_INFO a where 1 = 1
+		<include refid="sf-userInfo" />
+		order by ORDER_VALUE desc, ID desc
+		<![CDATA[ ) t_ where rownum <= (#row.first# + #row.count#)) where rn_ >= (#row.first# + 1) ]]>
+	</select>
+
+	<insert id="insertUserInfo" parameterClass="userInfo">
+		<selectKey resultClass="int" keyProperty="id">SELECT LAST_INSERT_ID() as value</selectKey>
+		<![CDATA[insert into USER_INFO (]]>
+		<dynamic prepend=" ">
+			<isNotNull property="id">ID</isNotNull>	
+			<isNotNull prepend="," property="user_name">USER_NAME</isNotNull>	
+			<isNotNull prepend="," property="login_name">LOGIN_NAME </isNotNull>
+			<isNotNull prepend="," property="password">PASSWORD </isNotNull>
+			<isNotNull prepend="," property="is_locked">IS_LOCKED </isNotNull>
+			<isNotNull prepend="," property="user_role">USER_ROLE </isNotNull>
+		</dynamic>
+		<![CDATA[) values (]]>
+		<dynamic prepend=" ">
+			<isNotNull property="id">#id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="user_name">#user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="login_name">#login_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="password">#password:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_locked">#is_locked:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_role">#user_role:VARCHAR#</isNotNull>
+		</dynamic>
+		<![CDATA[)]]>
+	</insert>
+
+	<update id="updateUserInfo" parameterClass="userInfo">
+		update USER_INFO
+		<dynamic prepend="set">
+			<isNotNull property="id">ID = #id:DECIMAL#</isNotNull>
+			<isNotNull prepend="," property="user_name">USER_NAME = #user_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="login_name">LOGIN_NAME = #login_name:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="password">PASSWORD = #password:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="is_locked">IS_LOCKED = #is_locked:VARCHAR#</isNotNull>
+			<isNotNull prepend="," property="user_role">USER_ROLE = #user_role:VARCHAR#</isNotNull>
+		</dynamic>
+		where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</update>
+
+	<delete id="deleteUserInfo" parameterClass="userInfo">
+		delete from USER_INFO where
+		<isNotEmpty prepend=" " property="id">ID = #id#</isNotEmpty>
+		<isEmpty prepend=" " property="id">
+			<isNotEmpty prepend=" " property="map.pks">
+				ID in
+				<iterate close=")" open="(" conjunction="," property="map.pks">#map.pks[]#</iterate>
+			</isNotEmpty>
+		</isEmpty>
+	</delete>
+
+</sqlMap>

@@ -21,8 +21,8 @@ function getStrutsJson() {
 		type: 'post',
 		url: 'login_login',
 		//url: 'index_index',
-		data: {login_name:'admin',password:'admin',is_remember:'0'},
-        //dataType: "json",
+		data: {login_name:"admin",password:"adminss",is_remember:"0"},
+        dataType: "json",
 		success : succFunction
 	});
 }

@@ -85,7 +85,7 @@ public class LoginAction extends BaseAction{
 			}
 
 			session.setAttribute("userInfo", userInfo);
-			sendJson("1",msg,userInfo);
+			sendJson("0",msg,userInfo);
 			return "success";
 
 		}

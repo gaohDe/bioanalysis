@@ -6,7 +6,7 @@ app.service("loginService", function ($http) {
         var promise = $http({
             method: "post",
             // url: SERVERADDRESS + "/login_login",
-            url: "/login_login",
+            url: "login_login",
             data: user
         });
         return promise;

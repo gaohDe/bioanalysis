@@ -5,12 +5,10 @@ app.service("loginService", function ($http) {
     this.login = function (user) {
         var promise = $http({
             method: "post",
-            url: SERVERADDRESS + "/login_login",
+            // url: SERVERADDRESS + "/login_login",
+            url: "/login_login",
             data: user
         });
-
-        return promise.then(function (res) {
-            return res.data;
-        });
+        return promise;
     };
 });

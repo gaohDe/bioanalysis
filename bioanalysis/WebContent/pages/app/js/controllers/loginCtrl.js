@@ -40,7 +40,7 @@ app.controller("loginCtrl", ["$state", "$rootScope", "$scope", "loginService", "
                 $scope.passwordEmpty = false;
                 $scope.user.is_remember = $("#rememberMe")[0].checked ? 1 : 0;
                 loginService.login($scope.user).then(function (res) {
-                    if (res.retcode = 0) {
+                    if (res.data.retcode = 0) {
                         $state.go('app.processAnalysis');
                     } else {
                         $scope.accountError = true;

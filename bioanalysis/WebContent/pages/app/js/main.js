@@ -7,4 +7,4 @@ var app = angular.module('angle', [
     'ngCookies'
 ]);
 // var SERVERADDRESS = "http://111.231.15.108";
-var SERVERADDRESS = "http://localhost:8080/bioanalysis";
+// var SERVERADDRESS = "http://localhost:8080/bioanalysis";

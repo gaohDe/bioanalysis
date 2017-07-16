@@ -25,7 +25,7 @@
                 </div>
                 <div ng-show="passwordEmpty || passwordError" style="margin:5px 0 0 5px;">
                     <span ng-show="passwordEmpty" style="font-size: 12px;color:#a94442;">密码不能为空！</span>
-                    <span ng-show="passwordError" style="font-size: 12px;color:#a94442;">密码错误！</span>
+                    <span ng-show="passwordError && !accountError" style="font-size: 12px;color:#a94442;">密码错误！</span>
                 </div>
                 <div class="checkbox">
                     <label>

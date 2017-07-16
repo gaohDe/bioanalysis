@@ -10,8 +10,17 @@
 	
     <package name="default" namespace="/" extends="struts-default,json-default">
 		
+        <interceptors>
+        	<interceptor-stack name="ajaxStack" >
+        		<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="json"/>
+        	</interceptor-stack>
+        </interceptors>
+        
+        <default-interceptor-ref name="ajaxStack" />
+        
         <default-action-ref name="index" />
-
+		
         <global-results>
             <result name="error">/error.html</result>
         </global-results>

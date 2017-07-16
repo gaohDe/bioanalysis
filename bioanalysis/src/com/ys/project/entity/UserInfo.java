@@ -2,21 +2,23 @@ package com.ys.project.entity;
 
 import org.springframework.stereotype.Component;
 
+import com.ys.base.BaseEntity;
+
 @Component
-public class UserInfo {
-	private int id;
+public class UserInfo extends BaseEntity {
+	private Integer id;
 	private String user_name;
 	private String password;
 	private String login_name;
 	private String is_locked;
 	private String user_role;
 	
-	private int age;
+	private Integer age;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getLogin_name() {
@@ -25,10 +27,10 @@ public class UserInfo {
 	public void setLogin_name(String login_name) {
 		this.login_name = login_name;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	public String getUser_name() {

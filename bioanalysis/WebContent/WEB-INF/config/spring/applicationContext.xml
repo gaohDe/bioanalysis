@@ -10,6 +10,13 @@
 	default-autowire="byName">
 
 <context:component-scan base-package="com.ys.project"/>  
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">    
+        <property name="locations">    
+           <list>    
+                 <value>classpath:jdbc.properties</value>    
+           </list>    
+        </property>    
+     </bean>  
 	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
 	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
@@ -34,21 +41,22 @@
 		<!-- acquireIncrement 当连接池中的连接用完时，C3PO一次性创建新的连接数目 -->
 		<property name="acquireIncrement" value="1" />
 	</bean> 
+	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
 
 	<!-- Transaction manager for a single JDBC DataSource -->
- 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor"
 		lazy-init="true" />
-	<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
-		<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor" />
-	</bean>
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
 	<!-- SqlMap setup for iBATIS Database Layer -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:sqlmap-config.xml" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="lobHandler" ref="oracleLobHandler" />
+		<property name="lobHandler"><ref bean="lobHandler" /></property>
 	</bean>
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 	<aop:config>

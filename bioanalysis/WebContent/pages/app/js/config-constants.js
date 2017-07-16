@@ -41,7 +41,7 @@ App
                 'vendor/simple-line-icons/css/simple-line-icons.css'
             ],
             'login': [
-                'app/js/controllers/loginCtrl.js'
+                'pages/app/js/controllers/loginCtrl.js'
             ]
         },
         modules: [

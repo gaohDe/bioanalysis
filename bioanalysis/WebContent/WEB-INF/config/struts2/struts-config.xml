@@ -4,37 +4,28 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring" />
-    
-    <package name="default" namespace="/" extends="struts-default,json-default">
-
+	
+    <package name="default" namespace="/" extends="json-default">
+		
         <default-action-ref name="index" />
 
         <global-results>
-            <result name="error">/error.jsp</result>
+            <result name="error">/error.html</result>
         </global-results>
 
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
-        </global-exception-mappings>
-
-        <action name="*_*" class="{1}Action">
+        <action name="*_*" class="{1}Action" method="{2}">
         	<result type="json">  
-        		/pages/{2}.html
-                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+        		/pages/{1}.html
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+                <!-- 不填，表示返回所有action中get方法的属性，自动转换成json数据 -->  
                 <param name="root">dataMap</param>  
             </result>  
-            <result name="success">
+            <!-- <result name="success">
                 /pages/{2}.html
-            </result>
+            </result> -->
         </action>
-        
-        
     </package>
-
-    <!-- <include file="example.xml"/> -->
-    <!-- Add packages here -->
-
 </struts>

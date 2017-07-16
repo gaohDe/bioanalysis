@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
   <appender name="ERRORLogger" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="../yunlog/ErrLog" />
+    <param name="File" value="H:\logs/ErrLog" />
     <param name="threshold" value="error" />
     <param name="MaxFileSize" value="100KB" />
     <param name="MaxBackupIndex" value="100" />
@@ -10,7 +10,7 @@
     </layout>
   </appender>
   <appender name="AllLogger" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="../yunlog/ALLlog" />
+    <param name="File" value="H:\logs/ALLlog" />
     <param name="threshold" value="DEBUG" />
     <param name="MaxFileSize" value="10MB" />
     <param name="MaxBackupIndex" value="100" />
@@ -29,15 +29,52 @@
       <param name="LevelMax" value="ERROR" />
     </filter>
   </appender>
+  
+  
+  <appender name="IBatis" class="org.apache.log4j.ConsoleAppender">
+	<layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern"
+		value="%-4r [%t] %-5p %c %x - %m%n" />
+	</layout>
+	<filter class="org.apache.log4j.varia.LevelRangeFilter">
+		<param name="LevelMin" value="DEBUG" />
+		<param name="LevelMax" value="DEBUG" />
+	</filter>
+</appender>
+<logger name="com.ibatis" additivity="true">
+	<level value="DEBUG" />
+</logger>
+<logger name="Java.sql.Connection" additivity="true">
+	<level value="DEBUG" />
+</logger>
+<logger name="java.sql.Statement" additivity="true">
+	<level value="DEBUG" />
+</logger>
+<logger name="java.sql.PreparedStatement" additivity="true">
+	<level value="DEBUG" />
+	<appender-ref ref="IBatis" />
+</logger>
+<logger name="java.sql.ResultSet" additivity="true">
+	<level value="DEBUG" />
+	<appender-ref ref="IBatis" />
+</logger>
+  
+  
+  
+  
   <root>
-    <priority value="DEBUG" />
+    <priority value="ALL" />
+    <appender-ref ref="console" />
     <appender-ref ref="AllLogger" />
+    <appender-ref ref="IBatis" />
     <appender-ref ref="SystemOutLogger" />
   </root>
-  <logger name="body" additivity="false">
+  <logger name="body" additivity="true">
     <level value="DEBUG" />
+    <appender-ref ref="console" />
     <appender-ref ref="ERRORLogger" />
     <appender-ref ref="AllLogger" />
+    <appender-ref ref="IBatis" />
   </logger>
 </log4j:configuration>
 

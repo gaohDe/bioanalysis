@@ -18,7 +18,7 @@ App.config(['$controllerProvider', '$compileProvider', '$filterProvider', '$prov
 }]).config(['$translateProvider', function ($translateProvider) {
 
     $translateProvider.useStaticFilesLoader({
-        prefix : 'app/i18n/',
+        prefix : 'pages/app/i18n/',
         suffix : '.json'
     });
     $translateProvider.preferredLanguage('en');
@@ -660,7 +660,7 @@ App.provider('RouteHelpers', ['APP_REQUIRES', function (appRequires) {
   // Set here the base of the relative path
   // for all app views
   this.basepath = function (uri) {
-    return 'app/views/' + uri;
+    return 'pages/app/views/' + uri;
   };
 
   // Generates a resolve object by passing script names

@@ -66,7 +66,7 @@ App.run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache', f
     $rootScope.user = {
         name:     'John',
         job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
+        picture:  'pages/app/img/user/02.jpg'
     };
 
 }]);

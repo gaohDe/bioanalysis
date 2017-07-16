@@ -7,21 +7,19 @@
    <meta name="description" content="{{app.description}}">
    <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
    <title data-ng-bind="::pageTitle()">生物分析系统</title>
-   <link rel="stylesheet" href="app/css/bootstrap.css" data-ng-if="!app.layout.isRTL">
-   <link rel="stylesheet" href="app/css/app.css" data-ng-if="!app.layout.isRTL">
+   <link rel="stylesheet" href="pages/app/css/bootstrap.css" data-ng-if="!app.layout.isRTL">
+   <link rel="stylesheet" href="pages/app/css/app.css" data-ng-if="!app.layout.isRTL">
    <link rel="stylesheet" ng-href="{{app.layout.theme}}" data-ng-if="app.layout.theme">
-   <link rel="stylesheet" href="app/css/style.css">
+   <link rel="stylesheet" href="pages/app/css/style.css">
 </head>
 
 <body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed, 'layout-fs': app.useFullLayout, 'hidden-footer': app.hiddenFooter, 'layout-h': app.layout.horizontal, 'aside-float': app.layout.isFloat}">
    <div data-ui-view="" data-autoscroll="false" class="wrapper"></div>
-   <script src="app/js/base.js"></script>
-   <script src="app/js/main.js"></script>
-   <script src="app/js/app.js"></script>
-   <script src="app/js/config-router.js"></script>
-   <script src="app/js/config-constants.js"></script>
-   
-   helloworld
+   <script src="pages/app/js/base.js"></script>
+   <script src="pages/app/js/main.js"></script>
+   <script src="pages/app/js/app.js"></script>
+   <script src="pages/app/js/config-router.js"></script>
+   <script src="pages/app/js/config-constants.js"></script>
 </body>
 
 </html>

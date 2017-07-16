@@ -6,7 +6,7 @@
                      ng-class="{'has-success':loginForm.accountName.$valid,'has-error':accountEmpty}">
                     <label class="control-label" for="inputUserName">用户名</label>
                     <input type="text" name="accountName" class="form-control" id="inputUserName" placeholder="用户名"
-                           ng-model="user.name" required ng-change="checkName()">
+                           ng-model="user.login_name" required ng-change="checkName()">
                     <span ng-show="loginForm.accountName.$valid" class="glyphicon glyphicon-ok form-control-feedback"
                           aria-hidden="true"></span>
                     <span ng-show="accountEmpty" class="glyphicon glyphicon-remove form-control-feedback"

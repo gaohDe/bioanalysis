@@ -5,19 +5,14 @@ app.service("loginService", function ($http) {
     this.login = function (user) {
         var promise = $http({
             method: "post",
-            url: "pages/server/user.json",
-            data: {
-                "name": "gh"
-            }
+            // url: ORIGINSERVERADDRESS + "/login_login",
+            url: LOCALSERVERADDRESS + "/login_login",
+            //headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: {login_name:'admin',password:'admin',is_remember:'0'}
         });
+
         return promise.then(function (res) {
-            for (var i = 0; i < res.data.length; i++) {
-                if (user.name == res.data[i].name && user.password == res.data[i].password) {
-                    return true;
-                } else {
-                    return false
-                }
-            }
+            return res.data;
         });
     };
 });

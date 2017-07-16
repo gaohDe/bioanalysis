@@ -30,6 +30,7 @@ public class LoginAction extends BaseAction{
 	public String login() {
 		String msg = "执行成功";
 		user = new UserInfo();
+		
 		if(StringUtils.isEmpty(login_name)) {
 			msg = "登录用户名不能为空";
 			sendJson("1",msg,null);
@@ -85,7 +86,7 @@ public class LoginAction extends BaseAction{
 			}
 
 			session.setAttribute("userInfo", userInfo);
-			sendJson("1",msg,userInfo);
+			sendJson("0",msg,userInfo);
 			return "success";
 
 		}

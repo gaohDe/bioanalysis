@@ -59,6 +59,8 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,Ser
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 		response.setHeader("Access-Control-Allow-Origin", "*"); 
+		response.setHeader("Access-Control-Allow-Methods","POST");
+		response.setHeader("Access-Control-Allow-Headers","x-requested-with,content-type");
 	}
 	
 	public void sendJson(String retcode, String retMsg, Object obj) {

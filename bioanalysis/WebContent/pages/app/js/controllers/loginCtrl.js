@@ -11,6 +11,8 @@ app.controller("loginCtrl", ["$state", "$rootScope", "$scope", "loginService", "
         $scope.passwordError = false;
         $scope.user = $cookieStore.get("bioanalysisAccount") ? $cookieStore.get("bioanalysisAccount") : {};
         $scope.checkName = function () {
+            $scope.accountError = false;
+            $scope.passwordError = false;
             if ($scope.loginForm.accountName.$valid) {
                 $scope.accountEmpty = false;
             } else {
@@ -33,7 +35,7 @@ app.controller("loginCtrl", ["$state", "$rootScope", "$scope", "loginService", "
                 }
                 $scope.accountEmpty = false;
                 $scope.passwordEmpty = false;
-                loginService.test($scope.user).then(function (res) {
+                loginService.login($scope.user).then(function (res) {
                     if (res) {
                         $rootScope.user = $scope.user;
                         $state.go('app.processAnalysis');

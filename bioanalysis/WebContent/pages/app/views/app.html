@@ -1,7 +1,7 @@
-<header ng-include="'pages/app/views/partials/top-navbar.html'" style="background: #dddddd;"></header>
-<aside ng-include="'pages/app/views/partials/side-bar.html'" style="height:300px;width:160px;position: fixed;top:52px;left:0;">
+<header ng-include="'pages/app/views/partials/top-navbar.html'" style="background: #dddddd;position: fixed;top:0;width:100%;"></header>
+<aside ng-include="'pages/app/views/partials/side-bar.html'" style="height:300px;width:220px;position: fixed;top:52px;left:0;">
 </aside>
-<section style="margin-left:160px;background:#aaa;">
+<section style="margin-left:220px;margin-top:52px;background: #ddd;min-height:500px;">
     <div ui-view></div>
-    <footer ng-include="'pages/app/views/partials/footer.html'" style="position: absolute;bottom:0;"></footer>
+    <!--<footer ng-include="'pages/app/views/partials/footer.html'" style="position: absolute;bottom:0;"></footer>-->
 </section>

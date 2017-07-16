@@ -5,19 +5,10 @@ app.service("loginService", function ($http) {
     this.login = function (user) {
         var promise = $http({
             method: "post",
-            url: "pages/server/user.json",
-            data: {
-                "name": "gh"
-            }
+            // url: SERVERADDRESS + "/login_login",
+            url: "/login_login",
+            data: user
         });
-        return promise.then(function (res) {
-            for (var i = 0; i < res.data.length; i++) {
-                if (user.name == res.data[i].name && user.password == res.data[i].password) {
-                    return true;
-                } else {
-                    return false
-                }
-            }
-        });
+        return promise;
     };
 });

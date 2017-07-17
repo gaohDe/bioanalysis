@@ -40,11 +40,13 @@ app.controller("loginCtrl", ["$state", "$rootScope", "$scope", "loginService", "
                 $scope.passwordEmpty = false;
                 $scope.user.is_remember = $("#rememberMe")[0].checked ? 1 : 0;
                 loginService.login($scope.user).then(function (res) {
-                    if (res.data.retcode = 0) {
+                    if (res.data.retcode == 0) {
                         $state.go('app.processAnalysis');
-                    } else {
-                        $scope.accountError = true;
+                    } else if(res.data.retmsg == "密码错误，请确认密码重新输入"){
                         $scope.passwordError = true;
+                        $scope.user.password = '';
+                    }else if(res.data.retmsg == "无此用户，请确认用户名是否正确"){
+                        $scope.accountError = true;
                         $scope.user.password = '';
                     }
                 });

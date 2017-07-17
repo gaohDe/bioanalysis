@@ -2,6 +2,14 @@
     margin-top: 20px;
 }
 
+.ta-r {
+    text-align: right;
+}
+
+.mr-30 {
+    margin-right: 30px;
+}
+
 #login .login-content {
     height: 100%;
     width: 100%;
@@ -13,7 +21,7 @@
 
 #login .login-form {
     width: 30%;
-    min-width:300px;
+    min-width: 300px;
     margin: 0 auto;
     /*background: #656565;*/
     background: #fff;
@@ -24,6 +32,92 @@
 #login .form-group label, #login .checkbox label {
     color: #333;
 }
-#login .form-group{
-    margin:10px 0 0 0;
+
+#login .form-group {
+    margin: 10px 0 0 0;
+}
+
+#sideBar {
+    overflow: hidden;
+    width: 100%;
+}
+
+#sideBar ul {
+    padding: 0
+}
+
+#sideBar ul li:hover {
+    background: #23b7e5;
+}
+
+#sideBar ul li:hover a {
+    color: #fff;
+}
+
+#sideBar ul li {
+    height: 60px;
+    list-style: none;
+    border-bottom: 1px solid #aaa;
+    width: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#sideBar ul li a {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+#topNavBar {
+    margin-bottom: 0;
+    background: #23b7e5
+}
+
+#topNavBar .top-nav-logo {
+    width: 48px;
+    height: 48px;
+}
+
+#topNavBar .top-nav-right {
+    line-height: 52px;
+}
+
+#topNavBar .top-nav-right a {
+    color: #333;
+    text-decoration: none
+}
+
+#topNavBar .top-nav-right-accountImg {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+#topNavBar .top-nav-right-helpImg {
+    width: 9px;
+    height: 12px;
+    margin-right: 8px;
+    margin-bottom: 3px;
+}
+
+#topNavBar .nav-top-logo-text {
+    line-height: 52px;
+    padding: 0
+}
+
+#topNavBar .nav-top-logo-text span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#analysisResult, #dataBase, #processAnalysis, #softwareAnalysis {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 30px;
 }

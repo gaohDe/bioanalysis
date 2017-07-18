@@ -29,6 +29,35 @@
       <param name="LevelMax" value="ERROR" />
     </filter>
   </appender>
+  <appender name="IBatis" class="org.apache.log4j.ConsoleAppender">     
+   <layout class="org.apache.log4j.PatternLayout">     
+      <param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />     
+   </layout>     
+   <filter class="org.apache.log4j.varia.LevelRangeFilter">     
+      <param name="LevelMin" value="DEBUG" />     
+      <param name="LevelMax" value="DEBUG" />     
+   </filter>    
+</appender>     
+<logger name="com.ibatis" additivity="true">     
+   <level value="DEBUG" />     
+</logger>     
+<logger name="java.sql.Connection" additivity="true">     
+   <level value="DEBUG" />     
+</logger>     
+<logger name="java.sql.Statement" additivity="true">     
+   <level value="DEBUG" />     
+</logger>     
+<logger name="java.sql.PreparedStatement" additivity="true">     
+   <level value="DEBUG" />     
+   <appender-ref ref="IBatis" />     
+</logger>     
+<logger name="java.sql.ResultSet" additivity="true">     
+   <level value="DEBUG" />     
+   <appender-ref ref="IBatis" />     
+</logger>
+<logger name="com.opensymphony.xwork2" level="debug"/>
+<logger name="org.apache.struts2" level="debug"/>
+
   <root>
     <priority value="DEBUG" />
     <appender-ref ref="AllLogger" />

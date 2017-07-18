@@ -9,22 +9,28 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
     <package name="default" namespace="/" extends="struts-default,json-default">
-		
-        <interceptors>
-        	<interceptor-stack name="ajaxStack" >
-        		<interceptor-ref name="defaultStack" />
+		<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>  
+			   		<param name="exception.logLevel">error</param>  
+				</interceptor-ref>
 				<interceptor-ref name="json"/>
-        	</interceptor-stack>
-        </interceptors>
-        
-        <default-interceptor-ref name="ajaxStack" />
-        
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack" />
         <default-action-ref name="index" />
-		
         <global-results>
-            <result name="error">/error.html</result>
-        </global-results>
-
+	        <result name="sql">/Error.jsp</result>
+	        <result name="naming">/Error.jsp</result>
+	        <result name="global">/Error.jsp</result>
+	    </global-results>
+		<global-exception-mappings>
+	        <exception-mapping result="sql" exception="java.sql.SQLException"></exception-mapping>
+	        <exception-mapping result="naming" exception="javax.naming.NamingException"></exception-mapping>
+	        <exception-mapping result="global" exception="java.lang.Exception"></exception-mapping>
+	    </global-exception-mappings>
+	    
         <action name="*_*" class="{1}Action" method="{2}">
         	<result type="json">  
         		/pages/{1}.html
